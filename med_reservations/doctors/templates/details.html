@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+{% block title %}
+Informacja o lekarzu
+{% endblock %}
+
+{% block content %}
+<h1>{{ doctor.first_name }} {{ doctor.last_name }}</h1>
+
+<p>Speciality: {{ doctor.speciality }}</p>
+<p>Phone: {{ doctor.phone }}</p>
+<p>Email: {{ doctor.email }}</p>
+<p>Member since: {{ doctor.added_date }}</p>
+
+<p>Back to <a href="/doctors">Lista Lekarzy</a></p>
+<p><a href="/">HOME</a></p>
+{% endblock %}
