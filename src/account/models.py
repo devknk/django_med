@@ -36,7 +36,7 @@ def get_profile_image_filepath(self, filename):
     return f'profile_images/{self.pk}/{"profile_img.png"}'
 
 def get_default_profile_image():
-    return "media/profile_img.png"
+    return "/media/profile_img.png"
 
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
@@ -63,7 +63,7 @@ class Account(AbstractBaseUser):
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
-    def has_module_perm(self, app_label):
+    def has_module_perms(self, app_label):
         return True
 
     def get_profile_image_name(self):

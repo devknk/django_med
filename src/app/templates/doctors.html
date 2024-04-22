@@ -1,17 +1,18 @@
 {% extends "main.html" %}
 
 {% block title %}
-Title
+Doctors in MEDnet
 {% endblock %}
 
 {% block content %}
-<ul>
-  {% for x in all_doctors %}
-    <li><a href="details/{{x.id}}"> {{ x.first_name }} {{ x.last_name }} {{x.speciality}}</a></li>
-  {% empty %}
-    <li> Brak lekarzy</li>
-  {% endfor %}
-</ul>
-
-<p><a href="/">HOME</a></p>
+  <div class="mycard">
+    <h1>Lekarze MEDnet</h1>
+    <ul>
+      {% for x in all_doctors %}
+        <li onclick="window.location = 'details/{{ x.id }}'">{{ x.first_name }} {{ x.last_name }} {{ x.speciality }}</li>
+      {% empty %}
+      <li> Brak lekarzy</li>
+      {% endfor %}
+    </ul>
+  </div>
 {% endblock %}

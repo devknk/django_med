@@ -1,10 +1,19 @@
+{% load static %}
 <!DOCTYPE html>
+<link rel="stylesheet" href="{% static 'staff.css' %}">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title>{% block title %}{% endblock %}</title>
 </head>
 <body>
+
+<div class="topnav">
+  <a href="/">HOME</a> |
+  <a href="/doctors">Nasi lekarze</a> |
+    <a href="/specialities">Nasi specjalisci</a>
+</div>
+
 {% block content %}
 {% endblock %}
 </body>
