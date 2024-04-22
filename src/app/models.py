@@ -41,7 +41,7 @@ class Patient(Member):
 
 class Reservation(models.Model):
     created_date = models.DateField(auto_now_add=True)
-    client = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='reservations')
+    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='reservations')
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='reservations')
     date = models.DateField()
     description = models.TextField()

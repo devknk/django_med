@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+{% block title %}
+Informacja o wizytach
+{% endblock %}
+
+{% block content %}
+<ul>
+  {% for x in all_reservations %}
+    <li><a href="reservation/{{x.id}}"> {{ x.date }} {{ x.doctor }} {{ x.patient }} </a></li>
+  {% empty %}
+    <li> Brak umówionych wizyt</li>
+  {% endfor %}
+</ul>
+
+<p><a href="/">HOME</a></p>
+{% endblock %}

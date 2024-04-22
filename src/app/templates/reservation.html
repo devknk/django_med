@@ -1,0 +1,17 @@
+{% extends "main.html" %}
+
+{% block title %}
+Informacja o wizycie nr {{ reservation.id }}
+{% endblock %}
+
+{% block content %}
+<h1>Visit id: {{ reservation.id }} {{ doctor.last_name }}</h1>
+<p>Date of the visit: {{ reservation.date }}</p>
+<p>Speciality: {{ doctor.speciality }}</p>
+<p>Phone: {{ doctor.phone }}</p>
+<p> Created at: {{ reservation.created_date }}</p>
+
+
+<p>Back to <a href="/reservations">Lista wizyt</a></p>
+<p><a href="/">HOME</a></p>
+{% endblock %}
