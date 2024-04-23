@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
-from .models import Doctor, Reservation
+from .models import Doctor, Visit
 from django.db.models import Q
 
 
@@ -26,15 +26,27 @@ def index(request):
     return HttpResponse(template.render())
 
 
+def visits(request):
+    available_visits = Visit.objects.all().values()
+    template = loader.get_template('visits.html')
+    context = {'available_visits': available_visits}
+    return HttpResponse(template.render(context, request))
+
+def visit(request,id):
+    visit = Visit.objects.get(id=id)
+    template = loader.get_template('visit.html')
+    context = {'visit': visit}
+    return HttpResponse(template.render(context, request))
+
 def reservations(request):
-    all_reservations = Reservation.objects.all().values()
+    all_reservations = Visit.objects.all().values()
     template = loader.get_template('reservations.html')
     context = {'all_reservations': all_reservations}
     return HttpResponse(template.render(context, request))
 
 
 def reservation(request, id):
-    reservation = Reservation.objects.get(id=id)
+    reservation = Visit.objects.get(id=id)
     template = loader.get_template('reservation.html')
     context = {
         'reservation': reservation,

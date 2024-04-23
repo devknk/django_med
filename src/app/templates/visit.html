@@ -1,0 +1,16 @@
+{% extends "main.html" %}
+
+{% block title %}
+Informacja o dostepnej wizycie
+{% endblock %}
+
+{% block content %}
+<h1>Wizyta do rezerwacji</h1>
+
+<p>Time: {{ visit.date }}</p>
+<p>Speciality: {{ visit.speciality }}</p>
+<p>Doctor: ...</p>
+
+<p>Back to <a href="/visits">Lista dostepnych wizyt</a></p>
+<p><a href="/">HOME</a></p>
+{% endblock %}

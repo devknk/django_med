@@ -39,12 +39,18 @@ class Patient(Member):
         return f"{self.first_name} {self.last_name}"
 
 
-class Reservation(models.Model):
-    created_date = models.DateField(auto_now_add=True)
+class Visit(models.Model):
+    created_date = models.DateTimeField(auto_now_add=True)
     patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='reservations')
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='reservations')
-    date = models.DateField()
+    speciality = models.CharField(max_length=100, null=True, blank=True)
+    date = models.DateTimeField()
     description = models.TextField()
+
+    def save(self, *args, **kwargs):
+        if not self.speciality:
+            self.speciality = self.doctor.speciality
+        super().save(*args, **kwargs)
 
     # def __str__(self):
     #     return f"Reservation for {self.client.username} on {self.date}"
