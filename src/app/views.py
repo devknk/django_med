@@ -48,3 +48,9 @@ def specialities_list(request):
     unique_specialities = Doctor.objects.values('speciality').distinct()
     context = {'specialities': unique_specialities}
     return HttpResponse(template.render(context, request))
+
+def one_speciality_list(request, speciality):
+    template = loader.get_template('speciality.html')
+    spec_list = Doctor.objects.filter(speciality=speciality).values()
+    context = {'spec_list': spec_list}
+    return HttpResponse(template.render(context, request))

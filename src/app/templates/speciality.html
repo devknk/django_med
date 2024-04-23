@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block title %}
+Doctors in MEDnet
+{% endblock %}
+
+{% block content %}
+  <div class="mycard">
+    <h1>{{ speciality }} w MEDnet</h1>
+    <ul>
+      {% for x in spec_list %}
+        <li onclick="window.location = 'details/{{ x.id }}'">{{ x.speciality }} {{ x.first_name }} {{ x.last_name }}</li>
+      {% empty %}
+      <li> Brak dostepnych specjalizacji</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}
