@@ -1,4 +1,5 @@
 from django.urls import path
+from django.contrib import admin
 from . import views
 
 urlpatterns = [
@@ -11,5 +12,6 @@ urlpatterns = [
     path('doctors/details/<int:id>', views.details, name='details'),
     path('specialities/speciality/details/<int:id>', views.details, name='details'),
     path('specialities/speciality/<str:speciality>', views.one_speciality_list, name='spec_list'),
-    path('', views.index, name='index')
+    path('', views.index, name='index'),
+    path('admin/', admin.site.urls)
 ]

@@ -35,13 +35,15 @@ class Patient(Member):
     client_number = models.CharField(max_length=10, unique=True, default=generate_unique_client_number,
                                      verbose_name="Client Number")
 
+    # todo: czy da sie dodac relacje klienta do wizyt? visits = models.ForeignKey(Visit) nie dziala
+
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
 
 class Visit(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
-    patient = models.ForeignKey(Patient, on_delete=models.CASCADE, related_name='reservations')
+    patient = models.ForeignKey(Patient, on_delete=models.PROTECT, related_name='reservations', blank=True, null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='reservations')
     speciality = models.CharField(max_length=100, null=True, blank=True)
     date = models.DateTimeField()
@@ -53,4 +55,7 @@ class Visit(models.Model):
         super().save(*args, **kwargs)
 
     # def __str__(self):
-    #     return f"Reservation for {self.client.username} on {self.date}"
+    #     return f"Reservation for {self.patient.username} on {self.date}"
+
+    class Meta:
+        verbose_name_plural = "Wizyty"

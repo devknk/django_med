@@ -27,19 +27,22 @@ def index(request):
 
 
 def visits(request):
-    available_visits = Visit.objects.all().values()
+    available_visits = Visit.objects.filter(patient__isnull=True)
     template = loader.get_template('visits.html')
     context = {'available_visits': available_visits}
     return HttpResponse(template.render(context, request))
 
-def visit(request,id):
+
+def visit(request, id):
     visit = Visit.objects.get(id=id)
     template = loader.get_template('visit.html')
     context = {'visit': visit}
     return HttpResponse(template.render(context, request))
 
+
+# visits that have been booked by patients:
 def reservations(request):
-    all_reservations = Visit.objects.all().values()
+    all_reservations = Visit.objects.filter(patient__isnull=False)
     template = loader.get_template('reservations.html')
     context = {'all_reservations': all_reservations}
     return HttpResponse(template.render(context, request))
@@ -61,8 +64,9 @@ def specialities_list(request):
     context = {'specialities': unique_specialities}
     return HttpResponse(template.render(context, request))
 
+
 def one_speciality_list(request, speciality):
     template = loader.get_template('speciality.html')
     spec_list = Doctor.objects.filter(speciality=speciality).values()
-    context = {'spec_list': spec_list}
+    context = {'spec_list': spec_list, 'speciality': speciality}
     return HttpResponse(template.render(context, request))

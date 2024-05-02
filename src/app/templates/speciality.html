@@ -7,7 +7,7 @@ Doctors in MEDnet
 {% block content %}
   <div class="mycard">
     <!-- jak wyswietlic sama specjalizacje? -->
-    <h1>{{ speciality }} w MEDnet</h1>
+    <h1>Doktorzy specjalnosci {{ speciality }} w MEDnet</h1>
     <ul>
       {% for x in spec_list %}
         <li onclick="window.location = 'details/{{ x.id }}'">{{ x.speciality }} {{ x.first_name }} {{ x.last_name }}</li>
