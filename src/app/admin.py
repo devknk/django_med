@@ -7,6 +7,7 @@ class MyDoctors(admin.ModelAdmin):
 
 class MyVisits(admin.ModelAdmin):
     list_display = ("id", "date", "doctor", "patient", "created_date")
+    readonly_fields = ["created_date", "speciality"]
 
 class MyPatients(admin.ModelAdmin):
     list_display = ("id", "first_name", "last_name", "added_date")

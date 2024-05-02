@@ -3,7 +3,7 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    path('reservations/reservation/<int:id>', views.reservation, name='reservation'),
+    path('reservations/reservation/<int:id>', views.single_reservation, name='reservation'),
     path('reservations/', views.reservations, name='reservations'),
     path('visits/', views.visits, name='available_visits'),
     path('visits/visit/<int:id>', views.visit, name='available_visit'),

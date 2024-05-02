@@ -28,7 +28,7 @@ def index(request):
 
 def visits(request):
     available_visits = Visit.objects.filter(patient__isnull=True)
-    future_visits = [ visit for visit in available_visits if not visit.is_past()]
+    future_visits = [available_visit for available_visit in available_visits if not available_visit.is_past()]
     template = loader.get_template('visits.html')
     context = {'future_visits': future_visits}
     return HttpResponse(template.render(context, request))
@@ -49,7 +49,7 @@ def reservations(request):
     return HttpResponse(template.render(context, request))
 
 
-def reservation(request, id):
+def single_reservation(request, id):
     reservation = Visit.objects.get(id=id)
     template = loader.get_template('reservation.html')
     context = {
