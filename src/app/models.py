@@ -31,6 +31,9 @@ class Doctor(Member):
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
 
+    class Meta:
+        verbose_name_plural = "Lekarze"
+
 
 class Patient(Member):
     identity_number = models.PositiveIntegerField(blank=False, null=False, unique=True)
@@ -41,6 +44,9 @@ class Patient(Member):
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
+
+    class Meta:
+        verbose_name_plural = "Pacjenci"
 
 
 class Visit(models.Model):
