@@ -1,3 +1,5 @@
+import datetime
+
 from django.db import models
 from django.core.validators import validate_email
 from django.utils import timezone
@@ -59,3 +61,6 @@ class Visit(models.Model):
 
     class Meta:
         verbose_name_plural = "Wizyty"
+
+    def is_past(self):
+        return self.date < timezone.now() - datetime.timedelta(days=1)

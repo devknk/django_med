@@ -8,7 +8,7 @@ Visits in MEDnet
   <div class="mycard">
     <h1>Dostepne wizyty w MEDnet</h1>
     <ul>
-      {% for visit in available_visits %}
+      {% for visit in future_visits %}
       <!-- jak dodac wyswietlanie nazwiska doktora -->
         <li onclick="window.location = 'visit/{{ visit.id }}'">{{ visit.speciality }} {{ visit.date }} </li>
       {% empty %}

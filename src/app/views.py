@@ -28,8 +28,9 @@ def index(request):
 
 def visits(request):
     available_visits = Visit.objects.filter(patient__isnull=True)
+    future_visits = [ visit for visit in available_visits if not visit.is_past()]
     template = loader.get_template('visits.html')
-    context = {'available_visits': available_visits}
+    context = {'future_visits': future_visits}
     return HttpResponse(template.render(context, request))
 
 
