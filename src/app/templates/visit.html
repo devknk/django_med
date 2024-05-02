@@ -11,6 +11,11 @@ Informacja o dostepnej wizycie
 <p>Speciality: {{ visit.speciality }}</p>
 <p>Doctor: {{ visit.doctor }}</p>
 
+<form action="" method="post">
+    {% csrf_token %}
+    <button type="submit" value="book_visit">Book Visit</button>
+</form>
+
 <p>Back to <a href="/visits">Lista dostepnych wizyt</a></p>
 <p><a href="/">HOME</a></p>
 {% endblock %}
