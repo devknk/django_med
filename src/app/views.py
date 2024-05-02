@@ -2,7 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import loader
 from .models import Doctor, Visit
-from django.db.models import Q
+from django.shortcuts import redirect, get_object_or_404
+from django.contrib.auth.decorators import login_required
 
 
 def doctors(request):
@@ -27,7 +28,7 @@ def index(request):
 
 
 def visits(request):
-    available_visits = Visit.objects.filter(patient__isnull=True)
+    available_visits = Visit.objects.filter(patient__isnull=True).order_by("doctor")
     future_visits = [available_visit for available_visit in available_visits if not available_visit.is_past()]
     template = loader.get_template('visits.html')
     context = {'future_visits': future_visits}
@@ -39,6 +40,24 @@ def visit(request, id):
     template = loader.get_template('visit.html')
     context = {'visit': visit}
     return HttpResponse(template.render(context, request))
+
+
+def visit_booked(request, id):
+    visit_booked = Visit.objects.get(id=id)
+    template = loader.get_template('visit_booked.html')
+    context = {'visit_booked': visit_booked}
+    return HttpResponse(template.render(context, request))
+
+# @login_required
+# def book_visit(request, visit_id):
+#     visit = get_object_or_404(Visit, pk=visit_id)
+#     if not request.user.is_patient:
+#         return redirect('not_allowed.html')
+#     visit.is_booked = True
+#     patient = request.user
+#     visit.add_patient(patient)
+#     visit.save()
+#     return redirect('visit_booked.html', visit_id=visit_id)
 
 
 # visits that have been booked by patients:
