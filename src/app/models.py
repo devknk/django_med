@@ -56,6 +56,15 @@ class Visit(models.Model):
     speciality = models.CharField(max_length=100, null=True, blank=True)
     date = models.DateTimeField()
     description = models.TextField()
+    is_booked = models.BooleanField(default=False)
+
+    def add_patient(self, patient):
+        if not self.is_booked:
+            self.patient = patient
+            self.is_booked = True
+            self.save()
+            return True
+        return False
 
     def save(self, *args, **kwargs):
         if not self.speciality:
