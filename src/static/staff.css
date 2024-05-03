@@ -101,3 +101,45 @@ a:link, a:visited {
 .button:hover {
   background-color: #73DFD2;
 }
+
+/* registaration styles */
+
+.card-signin {
+    width: 100%;
+    background-color: #f1f1f1;
+    background-image: linear-gradient(to bottom, #375BDC, #4D70EF);
+    background-size: 100% 100px;
+    background-repeat: no-repeat;
+    margin: 30px auto;
+    width: 450px;
+    border-radius: 5px;
+    box-shadow: 0 5px 7px -1px rgba(51, 51, 51, 0.23);
+    padding: 20px;
+}
+
+.form-signin input[type="email"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 10;
+    border-bottom-left-radius: 10;
+}
+.form-signin input[type="text"] {
+    margin-bottom: 10px;
+    border-bottom-right-radius: 10;
+    border-bottom-left-radius: 10;
+}
+.form-signin input[type="password"] {
+    margin-bottom: -1px;
+    border-top-left-radius: 10;
+    border-top-right-radius: 10;
+}
+.button_reg {
+    display: inline-block;
+    padding: 10px 10px; /* Adjust padding as needed */
+    font-size: 16px; /* Adjust font size as needed */
+    background-color: #60A9A0;
+    color: #ffffff; /* Button text color */
+    border: none; /* Remove default button border */
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition for hover effect */
+}
