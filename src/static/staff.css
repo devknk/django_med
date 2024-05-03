@@ -9,6 +9,8 @@ body {
   background-color:#375BDC;
   color:#ffffff;
   padding:10px;
+  display: flex;
+  justify-content: space-between;
 }
 .topnav a:link, .topnav a:visited {
   text-decoration: none;
@@ -71,8 +73,16 @@ a:link, a:visited {
   color:#375BDC;
 }
 .footer {
+  min-height: 50px;
   text-align:center;
   background-color:#E3E5EC;
-  color:#ffffff;
+  color:#6F799F;
   padding:10px;
+  font-size: 15px;
+}
+.left-text {
+  text-align: left !important;
+}
+.right-text {
+  text-align: right !important;
 }
