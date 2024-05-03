@@ -62,4 +62,12 @@ a:link, a:visited {
 .main, .main h1 {
   text-align:center;
   color:#375BDC;
+  min-height: 100vh;
+  height: 100%;
+}
+.footer {
+  text-align:center;
+  background-color:#E3E5EC;
+  color:#ffffff;
+  padding:10px;
 }
