@@ -13,7 +13,9 @@ Informacja o dostepnej wizycie
 
 <form action="" method="post">
     {% csrf_token %}
+    {% if request.user.is_authenticated %}
     <button type="submit" value="book_visit">Book Visit</button>
+    {% endif %}
 </form>
 
 <p>Wroc do <a href="/visits">Lista dostepnych wizyt</a></p>
