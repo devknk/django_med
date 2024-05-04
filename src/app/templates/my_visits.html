@@ -1,0 +1,18 @@
+{% extends "main.html" %}
+
+{% block title %}
+My visits in MEDnet
+{% endblock %}
+
+{% block content %}
+  <div class="mycard">
+    <h1>Moje wizyty w MEDnet</h1>
+    <ul>
+      {% for visit in my_visits %}
+        <li onclick="window.location = 'visit/{{ visit.id }}'">{{ visit.speciality }} {{ visit.date }} </li>
+      {% empty %}
+      <li> Brak dostepnych wizyt</li>
+      {% endfor %}
+    </ul>
+  </div>
+{% endblock %}

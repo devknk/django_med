@@ -1,29 +1,38 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
 
-#create a new user
-#create a superuser
+
+# create a new user
 
 class MyAccountManager(BaseUserManager):
 
-    def create_user(self, email, username, password=None):
+    def create_user(self, email, username, first_name, last_name, password=None):
         if not email:
             raise ValueError("Users must have an email")
         if not username:
             raise ValueError("Users must have a username")
+        if not first_name:
+            raise ValueError("Users must have a name")
+        if not last_name:
+            raise ValueError("Users must have a last name")
         user = self.model(
             email=self.normalize_email(email),
             username=username,
+            first_name=first_name,
+            last_name=last_name,
         )
         user.set_password(password)
         user.save(using=self.db)
         return user
 
-    def create_superuser(self, email, username, password):
+    # create a superuser
+    def create_superuser(self, email, username, password, first_name, last_name):
         user = self.create_user(
             email=self.normalize_email(email),
             username=username,
             password=password,
+            first_name=first_name,
+            last_name=last_name
         )
         user.is_admin = True
         user.is_staff = True
@@ -35,8 +44,10 @@ class MyAccountManager(BaseUserManager):
 def get_profile_image_filepath(self, filename):
     return f'profile_images/{self.pk}/{"profile_img.png"}'
 
+
 def get_default_profile_image():
-    return "/media/profile_img.png"
+    return "/profile_img.png"
+
 
 class Account(AbstractBaseUser):
     email = models.EmailField(verbose_name="email", max_length=60, unique=True)
@@ -47,19 +58,25 @@ class Account(AbstractBaseUser):
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_superuser = models.BooleanField(default=False)
-    profile_img = models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True, default=get_default_profile_image)
+    profile_img = models.ImageField(max_length=255, upload_to=get_profile_image_filepath, null=True, blank=True,
+                                    default=get_default_profile_image)
     hide_email = models.BooleanField(default=True)
+
+    first_name = models.CharField(max_length=255, blank=False, null=False)
+    second_name = models.CharField(max_length=255, blank=True, null=True)
+    last_name = models.CharField(max_length=255, blank=False, null=False)
 
     objects = MyAccountManager()  # tie the account to custom account manager
 
-    USERNAME_FIELD = 'email'  #to enable logging with email instead of username
-    REQUIRED_FIELDS = ['username']
-# override this three functions:
-# define what is going to be returned if object is accessed without any of the individual fields
+    USERNAME_FIELD = 'email'  # to enable logging with email instead of username
+    REQUIRED_FIELDS = ['username','first_name','last_name']
+
+    # override this three functions:
+    # define what is going to be returned if object is accessed without any of the individual fields
     def __str__(self):
         return self.username
 
-# set default permissions
+    # set default permissions
     def has_perm(self, perm, obj=None):
         return self.is_admin
 
@@ -67,4 +84,4 @@ class Account(AbstractBaseUser):
         return True
 
     def get_profile_image_name(self):
-        return str(self.profile_img)[str(self.profile_img).index('profile_images/{self.pk}/'):]
+        return str(self.profile_img)[str(self.profile_img).index(f'profile_images/{self.pk}/'):]

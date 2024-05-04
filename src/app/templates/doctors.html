@@ -11,7 +11,7 @@ Doctors in MEDnet
       {% for x in all_doctors %}
         <li onclick="window.location = 'details/{{ x.id }}'">{{ x.first_name }} {{ x.last_name }} {{ x.speciality }}</li>
       {% empty %}
-      <li> Brak lekarzy</li>
+      <li>Brak lekarzy</li>
       {% endfor %}
     </ul>
   </div>

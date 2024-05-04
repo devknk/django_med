@@ -7,15 +7,16 @@ Informacja o dostepnej wizycie
 {% block content %}
 <h1>Wizyta do rezerwacji</h1>
 
-<p>Time: {{ visit.date }}</p>
-<p>Speciality: {{ visit.speciality }}</p>
-<p>Doctor: {{ visit.doctor }}</p>
+<p>Data: {{ visit.date }}</p>
+<p>Specjalizacja: {{ visit.speciality }}</p>
+<p>Lekarz: {{ visit.doctor }}</p>
 
-<form action="" method="post">
+<form action="{% url 'book_visit' visit.id %}" method="post">
     {% csrf_token %}
-    <button type="submit" value="book_visit">Book Visit</button>
+    {% if request.user.is_authenticated and not visit.is_booked and not visit.is_past %}
+    <button type="submit" value="book_visit">Zarezerwuj wizyte</button>
+    {% endif %}
 </form>
 
-<p>Back to <a href="/visits">Lista dostepnych wizyt</a></p>
-<p><a href="/">HOME</a></p>
+<p>Wroc do <a href="/visits">Lista dostepnych wizyt</a></p>
 {% endblock %}
