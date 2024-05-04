@@ -1,7 +1,8 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from account.models import Account
-from app.models import Doctor, Patient, Visit
+# from app.models import Doctor, Patient, Visit
+from app.models import Doctor, Visit
 
 
 
@@ -24,12 +25,12 @@ class MyVisits(admin.ModelAdmin):
     readonly_fields = ["created_date", "speciality"]
 
 
-class MyPatients(admin.ModelAdmin):
-    list_display = ("id", "first_name", "last_name", "added_date")
+# class MyPatients(admin.ModelAdmin):
+#     list_display = ("id", "first_name", "last_name", "added_date")
 
 
 admin.site.register(Account, AccountAdmin)
 
 admin.site.register(Doctor, MyDoctors)
-admin.site.register(Patient, MyPatients)
+# admin.site.register(Patient, MyPatients)
 admin.site.register(Visit, MyVisits)

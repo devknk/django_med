@@ -4,6 +4,7 @@ from django.db import models
 from django.core.validators import validate_email
 from django.utils import timezone
 import uuid
+from account.models import Account
 
 
 def generate_unique_client_number():
@@ -35,32 +36,18 @@ class Doctor(Member):
         verbose_name_plural = "Lekarze"
 
 
-class Patient(Member):
-    identity_number = models.PositiveIntegerField(blank=False, null=False, unique=True)
-    client_number = models.CharField(max_length=10, unique=True, default=generate_unique_client_number,
-                                     verbose_name="Client Number")
-
-    # todo: czy da sie dodac relacje klienta do wizyt? visits = models.ForeignKey(Visit) nie dziala
-
-    def __str__(self):
-        return f"{self.first_name} {self.last_name}"
-
-    class Meta:
-        verbose_name_plural = "Pacjenci"
-
-
 class Visit(models.Model):
     created_date = models.DateTimeField(auto_now_add=True)
-    patient = models.ForeignKey(Patient, on_delete=models.PROTECT, related_name='reservations', blank=True, null=True)
+    patient = models.ForeignKey(Account, on_delete=models.PROTECT, related_name='reservations', blank=True, null=True)
     doctor = models.ForeignKey(Doctor, on_delete=models.CASCADE, related_name='reservations')
     speciality = models.CharField(max_length=100, null=True, blank=True)
     date = models.DateTimeField()
     description = models.TextField()
     is_booked = models.BooleanField(default=False)
 
-    def add_patient(self, patient):
+    def add_patient(self, user):
         if not self.is_booked:
-            self.patient = patient
+            self.patient = user
             self.is_booked = True
             self.save()
             return True
