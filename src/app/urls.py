@@ -1,9 +1,6 @@
 from django.urls import path
 from django.contrib import admin
 from . import views
-from account.views import (
-    register_view
-)
 
 urlpatterns = [
     path('reservations/reservation/<int:id>', views.single_reservation_view, name='reservation'),
@@ -17,6 +14,6 @@ urlpatterns = [
     path('doctors/details/<int:id>', views.doctors_details_view, name='details'),
     path('specialities/speciality/details/<int:id>', views.doctors_details_view, name='details'),
     path('specialities/speciality/<str:speciality>', views.one_speciality_view, name='spec_list'),
-    path('account/register/', register_view, name='register'),
     path('', views.index_view, name='index'),
+
 ]

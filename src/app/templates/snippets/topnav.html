@@ -7,9 +7,9 @@
   <div class="right-text">
     {% if request.user.is_authenticated %}
 					<a href="#">Moje wizyty</a> |
-					<a href="#">Wyloguj</a>
+					<a href="/account/logout">Wyloguj</a>
 				{% else %}
-					<a href="#">Zaloguj</a> |
+					<a href="/account/login">Zaloguj</a> |
 					<a class="button" href="/account/register">Rejestracja</a>
 				{% endif %}
   </div>
