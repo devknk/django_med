@@ -10,4 +10,5 @@ from account.views import (
 urlpatterns = [
     path('account/login/', login_view, name="login"),
     path('account/logout/', logout_view, name="logout"),
+    path('account/register/', register_view, name="register"),
     ]
