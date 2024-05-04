@@ -1,2 +1,2 @@
 # django_med
-Application providing reservation system for medical appointments.
+Django application providing reservation system for medical appointments.
