@@ -3,12 +3,13 @@ from django.contrib import admin
 from . import views
 
 urlpatterns = [
-    path('reservations/reservation/<int:id>', views.single_reservation_view, name='reservation'),
+    path('reservations/reservation/<int:visit_id>', views.single_reservation_view, name='reservation'),
     path('reservations/', views.reservations_view, name='reservations'),
     path('visits/', views.visits_view, name='available_visits'),
-    path('visits/visit/<int:id>', views.visit_view, name='available_visit'),
-    # path('visits/visit/<int:id>', views.book_visit, name='book_visit'),
-    # path('visits/visit_booked/<int:id>', views.visit_booked_view, name='visit_booked'),
+    path('my_visits/', views.my_visits_view, name='my_visits'),
+    path('my_visits/visit/<int:visit_id>', views.visit_view, name='my_visits'),
+    path('visits/visit/<int:visit_id>', views.visit_view, name='visit'),
+    path('book_visit/<int:visit_id>', views.book_visit, name='book_visit'),
     path('doctors/', views.doctors_view, name='doctors'),
     path('specialities/', views.specialities_list_view, name='specialities'),
     path('doctors/details/<int:id>', views.doctors_details_view, name='details'),

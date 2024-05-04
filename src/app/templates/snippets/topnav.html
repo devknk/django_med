@@ -6,7 +6,7 @@
   </div>
   <div class="right-text">
     {% if request.user.is_authenticated %}
-					<a href="#">Moje wizyty</a> |
+					<a href="/my_visits">Moje wizyty</a> |
 					<a href="/account/logout">Wyloguj</a>
 				{% else %}
 					<a href="/account/login">Zaloguj</a> |

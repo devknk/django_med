@@ -4,6 +4,7 @@ from django.template import loader
 from .models import Doctor, Visit
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
+from django.db import transaction
 
 
 def doctors_view(request):
@@ -36,32 +37,38 @@ def visits_view(request):
     return HttpResponse(template.render(context, request))
 
 
-def visit_view(request, id):
-    visit = Visit.objects.get(id=id)
+@login_required
+def my_visits_view(request):
+    my_visits = Visit.objects.filter(patient=request.user).order_by("doctor")
+    template = loader.get_template('my_visits.html')
+    context = {'my_visits': my_visits}
+    return HttpResponse(template.render(context, request))
+
+
+def visit_view(request, visit_id):
+    visit = Visit.objects.get(id=visit_id)
     template = loader.get_template('visit.html')
     context = {'visit': visit}
     return HttpResponse(template.render(context, request))
 
 
-# def visit_booked_view(request, id):
-#     visit_booked = Visit.objects.get(id=id)
-#     template = loader.get_template('visit_booked.html')
-#     context = {'visit_booked': visit_booked}
-#     return HttpResponse(template.render(context, request))
-
-# @login_required
-# def book_visit(request, visit_id):
-#     visit = get_object_or_404(Visit, pk=visit_id)
-#     if not request.user.is_patient:
-#         return redirect('not_allowed.html')
-#     visit.is_booked = True
-#     patient = request.user
-#     visit.add_patient(patient)
-#     visit.save()
-#     return redirect('visit_booked.html', visit_id=visit_id)
+@login_required
+def book_visit(request, visit_id):
+    visit = Visit.objects.get(id=visit_id)
+    doctor = visit.doctor
+    template = loader.get_template('reservation.html')
+    patient = request.user
+    visit.add_patient(patient)
+    context = {
+        'visit_id': visit_id,
+        'visit': visit,
+        'doctor': doctor,
+    }
+    return HttpResponse(template.render(context, request))
 
 
-# visits that have been booked by patients:
+# visits that have been booked by patients, for future use:
+@login_required
 def reservations_view(request):
     all_reservations = Visit.objects.filter(patient__isnull=False)
     template = loader.get_template('reservations.html')
@@ -69,11 +76,14 @@ def reservations_view(request):
     return HttpResponse(template.render(context, request))
 
 
-def single_reservation_view(request, id):
-    reservation = Visit.objects.get(id=id)
+@login_required
+def single_reservation_view(request, visit_id):
+    reservation = Visit.objects.get(id=visit_id)
     template = loader.get_template('reservation.html')
+    doctor = reservation.doctor
     context = {
         'reservation': reservation,
+        'doctor': doctor,
     }
     return HttpResponse(template.render(context, request))
 

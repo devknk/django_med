@@ -11,10 +11,10 @@ Informacja o dostepnej wizycie
 <p>Specjalizacja: {{ visit.speciality }}</p>
 <p>Lekarz: {{ visit.doctor }}</p>
 
-<form action="" method="post">
+<form action="{% url 'book_visit' visit.id %}" method="post">
     {% csrf_token %}
-    {% if request.user.is_authenticated %}
-    <button type="submit" value="book_visit">Book Visit</button>
+    {% if request.user.is_authenticated and not visit.is_booked and not visit.is_past %}
+    <button type="submit" value="book_visit">Zarezerwuj wizyte</button>
     {% endif %}
 </form>
 
