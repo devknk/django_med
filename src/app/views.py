@@ -5,6 +5,7 @@ from .models import Doctor, Visit
 from django.shortcuts import redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.db import transaction
+from django.utils import timezone
 
 
 def doctors_view(request):
@@ -39,9 +40,17 @@ def visits_view(request):
 
 @login_required
 def my_visits_view(request):
-    my_visits = Visit.objects.filter(patient=request.user).order_by("doctor")
+    my_visits = Visit.objects.filter(patient=request.user, date__gt=timezone.now()).order_by("-date")
     template = loader.get_template('my_visits.html')
     context = {'my_visits': my_visits}
+    return HttpResponse(template.render(context, request))
+
+
+@login_required
+def my_past_visits_view(request):
+    my_past_visits = Visit.objects.filter(patient=request.user, date__lt=timezone.now()).order_by("-date")
+    template = loader.get_template('my_visits.html')
+    context = {'my_past_visits': my_past_visits}
     return HttpResponse(template.render(context, request))
 
 

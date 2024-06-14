@@ -6,12 +6,23 @@ My visits in MEDnet
 
 {% block content %}
   <div class="mycard">
-    <h1>Moje wizyty w MEDnet</h1>
+    <h1>Moje zaplanowane wizyty w MEDnet</h1>
     <ul>
       {% for visit in my_visits %}
         <li onclick="window.location = 'visit/{{ visit.id }}'">{{ visit.speciality }} {{ visit.date }} </li>
       {% empty %}
-      <li> Brak dostepnych wizyt</li>
+      <li> Brak zaplanowanych wizyt</li>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div class="mycard-red">
+    <h1>Moje historyczne wizyty w MEDnet</h1>
+    <ul>
+      {% for visit in my_past_visits %}
+        <li class="li-red" onclick="window.location = 'visit/{{ visit.id }}'">{{ visit.speciality }} {{ visit.date }} </li>
+      {% empty %}
+      <li class="li-red"> Brak historycznych wizyt</li>
       {% endfor %}
     </ul>
   </div>
