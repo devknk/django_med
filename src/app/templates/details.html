@@ -7,10 +7,11 @@ Informacja o lekarzu
 {% block content %}
 <h1>{{doctor.first_name }} {{ doctor.last_name }}</h1>
 
-<p>Speciality: {{ doctor.speciality }}</p>
-<p>Phone: {{ doctor.phone }}</p>
+<p>Specjalizacja: {{ doctor.speciality }}</p>
+<p>Telefon: {{ doctor.phone }}</p>
 <p>Email: {{ doctor.email }}</p>
-<p>Member since: {{ doctor.added_date }}</p>
-
-<p>Back to <a href="/doctors">Lista Lekarzy</a></p>
+<p>Info: {{ doctor.info }}</p>
+<p>Jest z nami od: {{ doctor.added_date }}</p>
+<br>
+<p>Powrót do <a href="/doctors">Lista Lekarzy</a></p>
 {% endblock %}

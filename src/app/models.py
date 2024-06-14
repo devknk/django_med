@@ -28,6 +28,7 @@ class Member(models.Model):
 
 class Doctor(Member):
     speciality = models.CharField(max_length=255, blank=False, null=True)
+    info = models.TextField(max_length=255, blank=True, null=True)
 
     def __str__(self):
         return f"{self.first_name} {self.last_name}"
