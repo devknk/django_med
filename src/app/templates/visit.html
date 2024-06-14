@@ -5,7 +5,7 @@ Informacja o dostepnej wizycie
 {% endblock %}
 
 {% block content %}
-<h1>Wizyta do rezerwacji</h1>
+<h1>Wizyta medyczna</h1>
 
 <p>Data: {{ visit.date }}</p>
 <p>Specjalizacja: {{ visit.speciality }}</p>
@@ -17,6 +17,7 @@ Informacja o dostepnej wizycie
     <button type="submit" value="book_visit">Zarezerwuj wizyte</button>
     {% endif %}
 </form>
-
-<p>Wroc do <a href="/visits">Lista dostepnych wizyt</a></p>
+<br>
+<p>Wroc do <a href="/my_visits">Lista moich wizyt</a></p>
+<p>Przejdz do <a href="/visits">Lista dostepnych wizyt</a></p>
 {% endblock %}

@@ -5,11 +5,12 @@ Informacja o umowionej wizycie
 {% endblock %}
 
 {% block content %}
-<h1>id rezerwacji: {{ visit.id }}</h1>
+<h1>Informacja o umowionej wizycie:</h1>
 <p>Data: {{ visit.date }}</p>
 <p>Lekarz: {{ doctor.speciality }} {{ doctor.first_name }} {{ doctor.last_name }}</p>
-<p>Phone: {{ doctor.phone }}</p>
+<p>Telefon do lekarza: {{ doctor.phone }}</p>
 <br>
 
-<p>Back to <a href="/reservations">Lista wizyt</a></p>
+<p>Wroc do <a href="/my_visits">Lista moich wizyt</a></p>
+<p>Przejdz do <a href="/visits">Lista dostepnych wizyt</a></p>
 {% endblock %}
